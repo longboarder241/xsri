@@ -1,0 +1,136 @@
+.\" Process this file with
+.\" groff -man -Tascii xsri.1
+.\"
+.TH XSRI 1 "2004-01-25" "xsri 2.1.0" 
+.SH NAME
+xsri \- set the root window background in X
+.SH SYNOPSIS
+\fBxsri\fR [\fIOPTION\fR]...
+.SH DESCRIPTION
+Allows the display of text, patterns, and images in the root window, so users can customize the XDM-style login screen and/or the normal X background.
+
+The image displayed by \fBxsri\fR is composed of three layers:
+.IP 1)
+A background color or gradient
+.IP 2)
+An optional tiled image
+.IP 3)
+An optional \(lqemblem\(rq image
+
+
+.SH OPTIONS
+.SS Mode Selection Options 
+
+.TP
+\fB--set
+Set the background, by the standard method used for setting a users background (_XROOTPMAP_ID, ESETROOT_PMAP_I point to the pixmap ID, pixmap ID is owned by a persistant X connection which must be killed with XKillClient). This is the default mode.
+
+.TP
+\fB--run
+Maintains the background while running, but does not set it. This mode may take less memory than SET, since \fBxsri\fR can use multiple windows to display the image, and will work better on Pseudo-color displays. On exit, the background will be in an undefined state.
+
+.TP
+\fB--test
+The image is displayed in a window which is half the width and height of the screen.
+
+
+.SS Background Color and Gradient Options
+
+.TP
+\fB--color\fR=\fICOLOR1
+Set the background color.
+
+.TP
+\fB--color2\fR=\fICOLOR2
+If set, the background will be a gradient.
+
+.TP
+\fB--hgradient
+Draw a horizontal gradient from \fICOLOR1\fR at the left to \fICOLOR2\fR at the right. (Default if \fB--color2\fR is given.)
+
+.TP
+\fB--vgradient
+Draw a vertical gradient from \fICOLOR1\fR at the top to \fICOLOR2\fR at the bottom. (Default if \fB--color2\fR is given.)
+
+
+.SS Tiled Image Options
+.TP
+\fB--tile\fR=\fIIMAGE
+The \fIimage\fR to tile.
+
+.TP
+\fB--tile-alpha\fR={\fI0-255\fR}
+The alpha value of the tile (255 == fully opaque, default)
+
+
+.SS Emblem Options
+.TP
+\fB--emblem\fR=\fIIMAGE
+Set the emblem image to \fIIMAGE\fR.
+
+.TP
+\fB--emblem-alpha\fR={\fI0-255\fR}
+Set the alpha value of the emblem. The default is 255 ( == fully opaque).
+
+.TP
+\fB--emboss
+Emboss the emblem on the background.
+
+.TP
+\fB--geometry\fR=[\fIWIDTH\fRx\fIHEIGHT\fR][+\fIX\fR+\fIY\fR]
+Set the location or size of the emblem. Either the width and height or the location may be omitted.
+
+.TP
+\fB--center-x
+Center the emblem in the X direction.
+
+.TP
+\fB--center-y
+Center the emblem in the Y direction.
+
+.TP
+\fB--scale-width\fR[=\fIPERCENT\fR]
+Scale the emblem horizontally to a fraction of the width of the screen. 100% is the default.
+
+.TP
+\fB--scale-height\fR[=\fIPERCENT\fR]
+Scale the emblem vertically to a fraction of the height of the screen. 100% is the default.
+
+.TP
+\fB--avoid\fR=\fIWIDTH\fRx\fIHEIGHT\fR[+\fIX\fR+\fIY\fR]
+Shrink the width and/or height of the emblem as necessary to avoid the given rectangle. If \fIX\fR and \fIY\fR are not specified, the rectangle is centered. (Implies \fB--keep-aspect\fR.)
+
+.TP
+\fB--keep-aspect
+The width or height of the emblem will be shrunk as needed to maintain the aspect ratio.
+
+
+.SH PLACEMENT AND SCALING
+The placement and scaling item algorithm, specified exactly:
+
+Set w and h to width and height of the image.
+
+If \fB--geometry\fR=\fIW\fRx\fIH\fR was specifed, set w to \fIW\fR, h to \fIH\fR. If \fB--scale-width\fR=\fIPERCENT\fR was specified, set w to (\fIPERCENT\fR/100) * screen_width. If \fB--scale-height\fR=\fIPERCENT\fR was specified, set h to (\fIPERCENT\fR/100) * screen_height.
+
+Define the horizontal gravity point to be at center if \fI--center-x\fR was specified; otherwise, at right if \fB--geometry\fR=-\fIX\fR was specified; otherwise at left.
+
+Define the vertical gravity point to be at center if \fI--center-y\fR was specified; otherwise, at bottom if \fB--geometry\fR=-\fIY\fR was specified; otherwise at top.
+
+If \fB--center-x\fR, was specified, set x to center the image on the screen; otherwise, if the position was specified via geometry, use that; otherwise set x = 0.
+
+If \fB--center-y\fR, was specified, set y to center the image on the screen; otherwise, if the position was specified via geometry, use that; otherwise set y = 0.
+
+If \fB--keep-aspect\fR or \fB--avoid\fR was specified, then if the aspect ratio is narrower than that of the image, shrink the height to make the aspect ratio match; if the aspect ratio is wider than that of the image, shrink the height to make the apsect ratio match, keeping the gravity point at the same location.
+
+If \fB--avoid\fR was specified, shrink the image, keeping the aspect ratio the same and the gravity point in the same place to avoid the given rectangle. If this isn't possible, do not display the emblem.
+
+.SH AUTHOR
+Owen Taylor <otaylor@redhat.com>
+
+.SH COPYRIGHT
+Copyright \(co 2001, Red Hat, Inc.
+xsri is distributed under the terms of the GNU General Public License.
+See the included file \(lqCOPYING\(rq.
+
+.SH SEE ALSO
+\fBEsetroot\fR(1), \fBxsetroot\fR(1)
