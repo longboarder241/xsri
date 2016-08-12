@@ -1,8 +1,5 @@
 INCLUDES =					\
 	$(GTK_CFLAGS)				\
-	-DG_DISABLE_DEPRECATED			\
-	-DGDK_DISABLE_DEPRECATED		\
-	-DGTK_DISABLE_DEPRECATED		\
 	-DSYSCONFDIR=\"$(sysconfdir)\"
 
 bin_PROGRAMS = xsri
@@ -15,7 +12,7 @@ xsri_SOURCES =					\
 xsri_LDADD =					\
 	$(IMLIB_LIBS)				\
 	$(GTK_LIBS)				\
-	-lpopt
+	-lpopt -lm -lX11
 
 EXTRA_DIST =					\
 	xsri.spec.in
