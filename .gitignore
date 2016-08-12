@@ -1,0 +1,12 @@
+.deps/
+Makefile
+autom4te.cache/
+config.h
+config.log
+config.status
+render-background.o
+stamp-h
+stamp-h1
+xsri
+xsri.o
+xsri.spec
