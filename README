@@ -1,0 +1,146 @@
+xsri is a program for setting the root window background. It has
+far more options than it should, but not as many as some people
+probably want.
+
+The name of the program comes from an earlier program by Carsten
+Haitzler, but no code is actually shared with that program. The code
+in here mostly comes from the GNOME background selector.
+
+
+Requirements
+============
+
+ gdk-pixbuf
+ imlib
+ popt
+
+
+The image
+=========
+
+The image for xsri is composed of three layers:
+
+ 1) A background color or gradient
+ 2) An optional tiled image
+ 3) An optional "emblem" image
+
+Command line options affecting the background color:
+
+ --color    The background color
+ --color2   If set, the background will be a gradient.
+ --hgradient Draw a horizontal gradient from --color at the left to --color2
+	     at the right. (Default if --color2 is given.)
+ --vgradient Draw a vertical gradient from --color at the top to --color2
+	     at the bottom. (Default if --color2 is given.)
+
+Command line options affecting the tiled image:
+
+ --tile=IMAGE  The image to tile
+
+ --tile-alpha=0-255
+    The alpha value of the tile (255 == fully opaque, default)
+
+Command line options affecting the emblem:
+
+ --emblem=IMAGE
+
+ --emblem-alpha=0-255
+    The alpha value of the emblem (255 == fully opaque, default)
+
+ --emboss
+
+ --geometry=[WIDTHxHEIGHT][+X+Y]
+    The location or size of the emblem. Either the width and height or 
+    the location may be omitted.
+
+ --center-x 
+    Center the emblem in the X direction
+
+ --center-y
+    Center the emblem in the Y direction
+
+ --scale-width[=PERCENTAGE]
+    Scale the emblem horizontally to a fraction of the width of the screen
+    [ If percentage is not specified, will be taken as 100]
+
+ --scale-height[=PERCENTAGE]
+    Scale the emblem vertically to a fraction of the height of the screen
+    [ If percentage is not specified, will be taken as 100]
+
+ --avoid=WIDTHxHEIGHT[+X+Y]
+    Shrink the width and/or height of the emblem as necessary to avoid
+    the given rectangle. If X and Y are not specified, the rectangle
+    is centered. (Implies --keep-aspect)
+
+ --keep-aspect
+    The width or height of the emblem will be shrunk as needed to maintain
+    the aspect ratio.
+
+The placement and scaling item algorithm, specified exactly:
+
+  set w and h to width and height of the image
+  if --geometry=GWxGH was specifed, set w to W, h to H
+  if --scale-width=p was specified, set w to (p/100.) * screen_width
+  if --scale-height=p was specified, set h to (p/100.) * screen_width
+
+  Define the horizontal gravity point to be at center if --center-x
+    was specified, otherwise, if --geometry=-X was specified at the right,
+    otherwise at the left.
+
+  Define the vertical gravity point to be at center if --center-y
+    was specified, otherwise, if --geometry=-Y was specified at the bottom,
+    otherwise at the top.
+
+  If --center-x, was specified, set X to center the image on the screen, 
+    otherwise, if the position was specified via geometry, use that,
+    otherwise set X = 0.
+
+  If --center-y, was specified, set Y to center the image on the screen, 
+    otherwise, if the position was specified via geometry, use that,
+    otherwise set Y = 0.
+
+  If --keep-aspect or --avoid was specified, if the aspect ratio
+    is narrower than that of the image, shrink the height to make the
+    aspect ratio match, if the aspect ratio is wider than that of the 
+    image, shrink the height to make the apsect ratio match, keeping 
+    the gravity point at the same location.
+
+  If --avoid was specified, shrink the image, keeping the aspect
+    ratio the same and the gravity point in the same place to avoid
+    the given rectangle. If this isn't possible, do not display
+    the emblem.
+
+   
+Display
+=======
+
+ xsri supports three modes of operation
+  
+  --set Set the background, by the standard method used for setting a users
+        background (_XROOTPMAP_ID, ESETROOT_PMAP_I point to the pixmap
+        ID, pixmap ID is owned by a persistant X connection which
+        must be killed with XKillClient.) This is the default mode.
+
+  --run xsri maintains the background while running, but does not
+        set it. This mode may take less memory than SET, since xsri
+        can use multiple windows to display the image, and will 
+        work better on Pseudo-color displays. When xsri exits, the background 
+        will be in an undefined state.
+
+  --test The image is displayed in a window which is half the width and
+         height of the screen.
+
+
+Authors
+=======
+
+Owen Taylor <otaylor@redhat.com>
+
+
+License and Copyright
+=====================
+
+xsri is distributed under the terms of the GNU General Public License.
+See the included file "COPYING".
+
+Copyright Red Hat, Inc, 2001

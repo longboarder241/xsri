@@ -1,0 +1,66 @@
+Mon Feb 11 15:08:07 2002  Owen Taylor  <otaylor@redhat.com>
+
+	* Version 2.1.0
+
+	* render-background.c (get_root_xwindow): Support
+	__SWM_VROOT style fake root windows so that xsri can be
+	used by xscreensaver.
+
+	* xsri.c (position_emblem): Fixes for GTK+-2.0,
+	gcc-3.1.
+
+	* render-background.c Makefile.am imlib-misc.[ch]:
+	Remove Imlib depenndecy.
+
+	* configure.in (GDK_PIXBUF_LIBS): Check for 
+	gdk-pixbuf-2.0.
+
+Wed Aug 15 16:27:17 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.in: Version 2.0.3
+
+	* render-background.c (background_get_tile_size): Use 
+	128x128 tiles for solid colors as well as gradients
+	when dithering.
+
+Fri Aug  3 11:15:57 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.in: Version 2.0.2
+
+	* imlib-misc.h (background_imlib_init): Fix GNOME dependency.
+	that slipped in.
+
+Sun Jul  8 21:51:10 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.in: Version 2.0.1.
+
+	* render-background.c (get_visibility): Handle alpha
+	correctly in computation of visibilty.
+
+	* xsri.c (main): Read ~/.xsrirc $(sysconfdir)/X11/xsrirc
+	as popt macro files.
+
+	* xsri.c (position_emblem): Fix bug in avoidance computation.
+
+	* xsri.c (main): Fix bug with handling of legacy
+	"-keep-aspect"
+
+	* xsri.spec: Up epoch.
+
+Sun Jul  8 17:44:28 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* configure.in: Version 2.0.0.
+
+	* xsri.c (debugmsg): Fix vfprintf argument.
+
+Sun Jul  8 17:21:43 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* Makefile.am configure.in xsri.spec.in: Fix packaging.
+
+	* xsri.c: Include <string.h>
+
+Sat Jul  7 22:36:39 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* Start over taking code from
+	GNOME control center. Complete rewrite.
+
