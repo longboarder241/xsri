@@ -4,6 +4,7 @@ autom4te.cache/
 config.h
 config.log
 config.status
+configure
 render-background.o
 stamp-h
 stamp-h1
