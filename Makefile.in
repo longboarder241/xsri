@@ -90,15 +90,10 @@ xsri_LDADD = \
 	$(GTK_LIBS)				\
 	-lpopt -lm -lX11
 
-
-EXTRA_DIST = \
-	xsri.spec.in
-
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = xsri.spec
 bin_PROGRAMS = xsri$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
@@ -122,8 +117,7 @@ CFLAGS = @CFLAGS@
 DIST_SOURCES = $(xsri_SOURCES)
 DIST_COMMON = README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
 	Makefile.am Makefile.in NEWS aclocal.m4 config.h.in configure \
-	configure.in depcomp install-sh missing mkinstalldirs \
-	xsri.spec.in
+	configure.in depcomp install-sh missing mkinstalldirs
 SOURCES = $(xsri_SOURCES)
 
 all: config.h
@@ -171,8 +165,7 @@ $(srcdir)/./stamp-h.in: $(top_srcdir)/configure.in $(ACLOCAL_M4)
 
 distclean-hdr:
 	-rm -f config.h
-xsri.spec: $(top_builddir)/config.status xsri.spec.in
-	cd $(top_builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= CONFIG_LINKS= $(SHELL) ./config.status
+
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
@@ -410,16 +403,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	mostlyclean-generic tags uninstall uninstall-am \
 	uninstall-binPROGRAMS uninstall-info-am
 
-
-dist-hook: xsri.spec
-	if grep '^- Version @VERSION@' $(srcdir)/xsri.spec.in ; then : ; else \
-	   perl -ni.bak -e \
-	      'print; if (/^%changelog/) { chomp ($$date = `date +"%a %b %d %Y"`); print "* $$date Owen Taylor <otaylor\@redhat.com>\n- Version @VERSION@\n\n"; }' \
-	      $(srcdir)/xsri.spec.in ; \
-	   ( CONFIG_FILES=xsri.spec CONFIG_HEADERS= $(SHELL) ./config.status ) ; \
-	   cp -p $(srcdir)/xsri.spec.in $(distdir) ; \
-	fi
-	cp xsri.spec $(distdir)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

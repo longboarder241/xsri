@@ -34,5 +34,4 @@ AC_SUBST(GTK_LIBS)
 
 AC_OUTPUT([
 Makefile
-xsri.spec
 ])

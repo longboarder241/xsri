@@ -1,3 +1,9 @@
+Sat Aug 27 22:27:40 MST 2016  Tod Jackson  <tod.jackson@gmail.com>
+
+	* Resurrected at github.com/tjackson/xsri
+	* Disable GTK deprecation and fix linking issues
+	* Remove various rpm-specific code
+
 Mon Feb 11 15:08:07 2002  Owen Taylor  <otaylor@redhat.com>
 
 	* Version 2.1.0
