@@ -369,7 +369,7 @@ position_emblem (void)
                 if (x_space <= 0 && y_space <= 0) {
                         /* Can't adjust */
                         
-                        gdk_pixbuf_unref (bg_state.emblem_pixbuf);
+                        g_object_unref (bg_state.emblem_pixbuf);
                         bg_state.emblem_pixbuf = NULL;
 
                         return;
