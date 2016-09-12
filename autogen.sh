@@ -1,2 +1,2 @@
 #!/bin/sh
-autoconf -f -v
+autoreconf -i "$@"
