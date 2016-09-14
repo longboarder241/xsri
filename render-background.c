@@ -201,7 +201,7 @@ make_root_pixmap (gint width, gint height)
 	result = XCreatePixmap (display,
 				DefaultRootWindow (display),
 				width, height,
-				DefaultDepthOfScreen (DefaultScreenOfDisplay (gdk_display_get_default())));
+				DefaultDepthOfScreen (DefaultScreenOfDisplay (GDK_DISPLAY())));
 	XCloseDisplay (display);
 
 	return gdk_pixmap_foreign_new (result);
@@ -229,16 +229,16 @@ set_root_pixmap (GdkPixmap *pixmap)
 	Pixmap pixmap_id;
 	int result;
 
-	XGrabServer (gdk_display_get_default());
+	XGrabServer (GDK_DISPLAY());
 
-	result = XGetWindowProperty (gdk_display_get_default(), get_root_xwindow(),
+	result = XGetWindowProperty (GDK_DISPLAY(), get_root_xwindow(),
 				     gdk_x11_get_xatom_by_name("ESETROOT_PMAP_ID"),
 				     0L, 1L, False, XA_PIXMAP,
 				     &type, &format, &nitems, &bytes_after,
 				     &data_esetroot);
 
 	if (result == Success && type == XA_PIXMAP && format == 32 && nitems == 1) {
-		XKillClient(gdk_display_get_default(), *(Pixmap*)data_esetroot);
+		XKillClient(GDK_DISPLAY(), *(Pixmap*)data_esetroot);
 	}
 
 	if (data_esetroot != NULL) {
@@ -248,28 +248,28 @@ set_root_pixmap (GdkPixmap *pixmap)
 	if (pixmap != NULL) {
 		pixmap_id = GDK_WINDOW_XWINDOW (pixmap);
 
-		XChangeProperty (gdk_display_get_default(), get_root_xwindow(),
+		XChangeProperty (GDK_DISPLAY(), get_root_xwindow(),
 				 gdk_x11_get_xatom_by_name("ESETROOT_PMAP_ID"), 
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
-		XChangeProperty (gdk_display_get_default(), get_root_xwindow(),
+		XChangeProperty (GDK_DISPLAY(), get_root_xwindow(),
 				 gdk_x11_get_xatom_by_name("_XROOTPMAP_ID"), 
 				 XA_PIXMAP, 32, PropModeReplace,
 				 (guchar *) &pixmap_id, 1);
 
-		XSetWindowBackgroundPixmap (gdk_display_get_default(), get_root_xwindow(), 
+		XSetWindowBackgroundPixmap (GDK_DISPLAY(), get_root_xwindow(), 
 					    pixmap_id);
 	} else {
-		XDeleteProperty (gdk_display_get_default (), get_root_xwindow (),
+		XDeleteProperty (GDK_DISPLAY (), get_root_xwindow (),
 				 gdk_x11_get_xatom_by_name("ESETROOT_PMAP_ID"));
-		XDeleteProperty (gdk_display_get_default(), get_root_xwindow(),
+		XDeleteProperty (GDK_DISPLAY(), get_root_xwindow(),
 				 gdk_x11_get_xatom_by_name("_XROOTPMAP_ID"));
 	}
 
-	XClearWindow (gdk_display_get_default (), get_root_xwindow ());
-	XUngrabServer (gdk_display_get_default());
+	XClearWindow (GDK_DISPLAY (), get_root_xwindow ());
+	XUngrabServer (GDK_DISPLAY());
 
-	XFlush(gdk_display_get_default());
+	XFlush(GDK_DISPLAY());
 }
 
 gulong 
@@ -292,7 +292,7 @@ xpixel_to_color (gulong pixel, GdkColor *color)
 	cmap = GDK_COLORMAP_XCOLORMAP (gdk_colormap_get_system ());
 
 	xcolor.pixel = pixel;
-	XQueryColor (gdk_display_get_default(), cmap, &xcolor);
+	XQueryColor (GDK_DISPLAY(), cmap, &xcolor);
 
 	color->red = xcolor.red;
 	color->green = xcolor.green;
@@ -560,7 +560,7 @@ get_root_xwindow (void)
 		
 		root_window = GDK_ROOT_WINDOW ();
 
-		XQueryTree (gdk_display_get_default (), GDK_ROOT_WINDOW (),
+		XQueryTree (GDK_DISPLAY (), GDK_ROOT_WINDOW (),
 			    &root_return, &parent, &children, &n_children);
 
 		gdk_error_trap_push ();
@@ -570,7 +570,7 @@ get_root_xwindow (void)
 			int format;
 			unsigned long n_items, bytes_after;
 			
-			if (XGetWindowProperty (gdk_display_get_default (), children[i],
+			if (XGetWindowProperty (GDK_DISPLAY (), children[i],
 						gdk_x11_get_xatom_by_name ("__SWM_VROOT"),
 						0, 1, False, XA_WINDOW,
 						&type, &format, &n_items, &bytes_after, (guchar **)&data) == Success) {

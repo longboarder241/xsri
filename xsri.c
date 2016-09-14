@@ -543,9 +543,9 @@ main (int argc, char **argv)
                 }
 
                 if (tile_width == 1 && tile_height == 1) {
-                        XSetWindowBackground (gdk_display_get_default(), get_root_xwindow(),
+                        XSetWindowBackground (GDK_DISPLAY(), get_root_xwindow(),
                                               xpixel_from_color (&bg_state.bgColor1));
-                        XClearWindow (gdk_display_get_default (), get_root_xwindow ());
+                        XClearWindow (GDK_DISPLAY (), get_root_xwindow ());
                 } else {
                         pixmap = gdk_pixmap_new (get_root_gdk_window (), tile_width, tile_height, -1);
                         background_render (&bg_state, pixmap, tiles_useful,
