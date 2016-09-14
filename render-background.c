@@ -507,7 +507,7 @@ background_render (BGState     *state,
 			if (image_width == state->emblem_width &&
 			    image_height == state->emblem_height &&
 			    !gdk_pixbuf_get_has_alpha (state->emblem_pixbuf)) {
-				boss = gdk_pixbuf_ref (state->emblem_pixbuf);
+				boss = g_object_ref (state->emblem_pixbuf);
 			} else {
 				boss = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8,
 						       state->emblem_width, state->emblem_height);
@@ -523,7 +523,7 @@ background_render (BGState     *state,
 			}
 
 			emboss (pixbuf, boss, state->emblem_x - x, state->emblem_y - y);
-			gdk_pixbuf_unref (boss);
+			g_object_unref (boss);
 		} else {
 			composite (pixbuf, x, y, state->emblem_pixbuf,
 				   state->emblem_x, state->emblem_y, state->emblem_width, state->emblem_height,
@@ -539,7 +539,7 @@ background_render (BGState     *state,
 				       GDK_RGB_DITHER_MAX, x, y);
 	g_object_unref (gc);
 
-	gdk_pixbuf_unref (pixbuf);
+	g_object_unref (pixbuf);
 }
 
 /* We abstract the functionality of getting the root window since xscreensaver
