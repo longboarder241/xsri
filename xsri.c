@@ -304,7 +304,8 @@ position_emblem (void)
         }
 
         if (avoid) {
-                int avoid_x, avoid_y, avoid_width, avoid_height;
+                int avoid_x, avoid_y;
+		unsigned int avoid_width, avoid_height;
                 int avoid_flags;
                 int new_width, new_height;
                 int tmp_x, tmp_y;
