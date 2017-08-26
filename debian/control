@@ -1,0 +1,16 @@
+Source: xsri
+Maintainer: Tod Jackson <tod.jackson@gmail.com>
+Section: x11
+Priority: optional
+Standards-Version: 3.9.6
+Homepage: https://github.com/tjackson/xsri
+Vcs-Git: git://github.com/tjackson/xsri.git
+Vcs-Browser: https://github.com/tjackson/xsri
+Build-Depends: libpopt-dev, libgtk2.0-dev
+
+Package: xsri
+Architecture: any
+Replaces:
+Provides:
+Depends: libgtk2.0-bin, ${shlibs:Depends}, ${misc:Depends}
+Description: XSetRootImage
