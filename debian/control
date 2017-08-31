@@ -6,11 +6,11 @@ Standards-Version: 3.9.6
 Homepage: https://github.com/tjackson/xsri
 Vcs-Git: git://github.com/tjackson/xsri.git
 Vcs-Browser: https://github.com/tjackson/xsri
-Build-Depends: libpopt-dev, libgtk2.0-dev
+Build-Depends: libgtk2.0-dev, libpopt-dev
 
 Package: xsri
 Architecture: any
 Replaces:
 Provides:
-Depends: libgtk2.0-bin, ${shlibs:Depends}, ${misc:Depends}
+Depends: libgtk2.0-common, ${shlibs:Depends}, ${misc:Depends}
 Description: XSetRootImage
