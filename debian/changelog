@@ -1,3 +1,7 @@
+xsri (2.1.1-2) UNRELEASED; urgency=low
+  * Initial release
+ -- Tod Jackson <tod.jackson@gmail.com>  Wed, 30 Aug 2017 21:36:21 -0700
+
 xsri (2.1.1-1) UNRELEASED; urgency=low
   * Initial release
  -- Tod Jackson <tod.jackson@gmail.com>  Fri, 25 Aug 2017 23:24:26 -0700
