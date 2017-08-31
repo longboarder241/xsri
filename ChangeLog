@@ -1,3 +1,10 @@
+Wed Aug 30 21:24:20 2017  Tod Jackson  <tod.jackson@gmail.com>
+
+	* Version 2.1.1
+	* Provided packaging for Debian
+	* Silenced a few GTK+ deprecation warnings
+	* Regenerated autogen
+
 Sat Aug 27 22:27:40 2016  Tod Jackson  <tod.jackson@gmail.com>
 
 	* Resurrected at github.com/tjackson/xsri
