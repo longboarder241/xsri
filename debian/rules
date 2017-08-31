@@ -1,4 +1,4 @@
 #!/usr/bin/make -f
 %:
-	./autogen.sh
+	dh_auto_configure
 	dh $@
