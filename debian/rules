@@ -1,4 +1,5 @@
 #!/usr/bin/make -f
 %:
-	dh_auto_configure
+	./autogen.sh
+	./configure --prefix=/usr
 	dh $@
