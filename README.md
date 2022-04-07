@@ -1,3 +1,4 @@
+This code was updated to work with modern gcc
 xsri - set the root window background in X
 
 XSetRootImage (XSRI): Fedora's Y2K-era wallpaper setter. Feh can set
