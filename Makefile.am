@@ -1,4 +1,4 @@
-INCLUDES =					\
+AM_CPPFLAGS =					\
 	$(GTK_CFLAGS)				\
 	-DSYSCONFDIR=\"$(sysconfdir)\"
 
