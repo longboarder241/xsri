@@ -1,9 +1,9 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(xsri.c)
-
+AC_INIT(xsri, 2.1.1)
 dnl $Format: "AM_INIT_AUTOMAKE(xsri, $ReleaseVersion$)" $
-AM_INIT_AUTOMAKE(xsri, 2.1.1)
+AC_CONFIG_SRCDIR(xsri.c)
+AM_INIT_AUTOMAKE
 
 dnl Specify a configuration file
 AM_CONFIG_HEADER(config.h)
